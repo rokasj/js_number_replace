@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<input type="text" style="width:600px" value=''><br>
+<input type="text" style="width:600px" value=''><br>
+<input type="text" style="width:600px" value=''><br>
+<input type="text" style="width:600px" value=''><br>
+<textarea style="width:600px;height:400px"></textarea><br>
+<input type="button" onclick="f()" value="Replace">
+</body>
+</html>
+<script>
+window.onload = function () {
+    document.getElementsByTagName("input")[0].value = "(\\d+)";
+    document.getElementsByTagName("input")[1].value = "";
+    document.getElementsByTagName("input")[2].value = "";
+    document.getElementsByTagName("input")[3].value = "1";
+    document.getElementsByTagName("textarea")[0].value = "";
+}
+function f() {
+    var i = document.getElementsByTagName("input");
+    var t = document.getElementsByTagName("textarea")[0];
+    var r = t.value.replace(new RegExp(i[0].value, "g"), function(m, n) {
+        return i[1].value.replace("\\n", String.fromCharCode(10)) +
+                (Number(n) + Number(i[3].value)) +
+                i[2].value.replace("\\n", String.fromCharCode(10));
+    });
+    t.value = r;
+}
+</script>
